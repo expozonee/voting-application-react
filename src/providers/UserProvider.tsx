@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { User } from "../types/User";
 import { verifyUser } from "../utils/verifyUser";
+import { getUsers } from "../utils/getUsers";
+import USERS from "../data/users.json";
 
 type UserProviderProps = {
   children: ReactNode;
@@ -11,6 +13,8 @@ type UserContext = {
   isAdmin: boolean;
   user: User | undefined;
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  getUsers(): User[] | undefined;
+  createUsersDB(): void;
   login(
     username: string,
     password: string
@@ -33,7 +37,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
     if (ok) {
       setUser(user);
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("currentUser", JSON.stringify(user));
     }
 
     return { ok, status };
@@ -44,9 +48,29 @@ export function UserProvider({ children }: UserProviderProps) {
     localStorage.removeItem("user");
   }
 
+  function createUsersDB() {
+    const usersDb = USERS.map((user: User) => {
+      return {
+        ...user,
+        isVoted: false,
+      };
+    });
+
+    localStorage.setItem("users", JSON.stringify(usersDb));
+  }
+
   return (
     <UserContext.Provider
-      value={{ isSignedIn, isAdmin, user, setUser, login, logout }}
+      value={{
+        isSignedIn,
+        isAdmin,
+        user,
+        setUser,
+        login,
+        logout,
+        getUsers,
+        createUsersDB,
+      }}
     >
       {children}
     </UserContext.Provider>

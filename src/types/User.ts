@@ -3,4 +3,5 @@ export type User = {
   password: string;
   type: string;
   email: string;
+  isVoted?: boolean;
 };

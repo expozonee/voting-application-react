@@ -1,10 +1,20 @@
-import USERS from "../data/users.json";
-
 // types
 import type { User } from "../types/User";
 
 export function verifyUser(username: string, password: string) {
-  const users: User[] = USERS;
+  let users;
+
+  const usersString = localStorage.getItem("users");
+
+  if (usersString) {
+    users = JSON.parse(usersString) as User[];
+  }
+
+  if (!users)
+    return {
+      status: "Db does not exist",
+      ok: false,
+    };
 
   const user = users.find((user) => {
     return user.name === username;
