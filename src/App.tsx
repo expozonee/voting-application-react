@@ -1,12 +1,11 @@
 import "./App.css";
 import { useEffect } from "react";
-import AdminPage from "./components/AdminPage/AdminPage";
 import LoginPage from "./components/LoginPage/LoginPage";
-import UserPage from "./components/UserPage/UserPage";
+import UserPage from "./components/Dashboard/UserPage";
 import { useUser } from "./providers/UserProvider";
 
 function App() {
-  const { user, isSignedIn, setUser, createUsersDB } = useUser();
+  const { isSignedIn, createUsersDB, setCurrentUser } = useUser();
 
   useEffect(() => {
     if (!localStorage.getItem("users")) {
@@ -15,26 +14,14 @@ function App() {
   }, [createUsersDB]);
 
   useEffect(() => {
-    const userString = localStorage.getItem("user");
+    const userString = localStorage.getItem("currentUser");
 
     if (userString) {
-      setUser(JSON.parse(userString));
+      setCurrentUser(JSON.parse(userString));
     }
-  }, [setUser]);
+  }, [setCurrentUser]);
 
-  return (
-    <>
-      {isSignedIn ? (
-        user?.type === "admin" ? (
-          <AdminPage />
-        ) : (
-          <UserPage />
-        )
-      ) : (
-        <LoginPage />
-      )}
-    </>
-  );
+  return <>{isSignedIn ? <UserPage /> : <LoginPage />}</>;
 }
 
 export default App;
