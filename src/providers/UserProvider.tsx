@@ -64,9 +64,16 @@ export function UserProvider({ children }: UserProviderProps) {
   function updateUsersDb(user: User) {
     const users = getUsers();
 
+    const userIndex = users!.findIndex((u) => u.name === user.name);
+    const updatedUsers = [...users!.filter((u) => u.name !== user.name)];
+
     if (users) {
-      const updatedUsers = [...users.filter((u) => u.name !== user.name), user];
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      const updatedArrUsers = [
+        ...updatedUsers.slice(0, userIndex),
+        user,
+        ...updatedUsers.slice(userIndex),
+      ];
+      localStorage.setItem("users", JSON.stringify(updatedArrUsers));
       localStorage.setItem("currentUser", JSON.stringify(user));
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser")!) as User);
     }
