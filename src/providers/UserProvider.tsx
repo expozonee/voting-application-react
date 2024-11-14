@@ -11,8 +11,8 @@ type UserProviderProps = {
 type UserContext = {
   isSignedIn: boolean;
   isAdmin: boolean;
-  user: User | undefined;
-  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  currentUser: User | undefined;
+  setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>;
   getUsers(): User[] | undefined;
   createUsersDB(): void;
   login(
@@ -23,20 +23,21 @@ type UserContext = {
     status: string;
   };
   logout(): void;
+  updateUsersDb(user: User): void;
 };
 
 const UserContext = createContext<UserContext | null>(null);
 
 export function UserProvider({ children }: UserProviderProps) {
-  const [user, setUser] = useState<User | undefined>(undefined);
-  const isSignedIn = !!user;
-  const isAdmin = isSignedIn && user.type === "admin";
+  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+  const isSignedIn = !!currentUser;
+  const isAdmin = isSignedIn && currentUser.type === "admin";
 
   function login(username: string, password: string) {
     const { user, ok, status } = verifyUser(username, password);
 
     if (ok) {
-      setUser(user);
+      setCurrentUser(user);
       localStorage.setItem("currentUser", JSON.stringify(user));
     }
 
@@ -44,19 +45,31 @@ export function UserProvider({ children }: UserProviderProps) {
   }
 
   function logout() {
-    setUser(undefined);
-    localStorage.removeItem("user");
+    setCurrentUser(undefined);
+    localStorage.removeItem("currentUser");
   }
 
   function createUsersDB() {
-    const usersDb = USERS.map((user: User) => {
+    const usersDb = USERS.map((user) => {
       return {
         ...user,
         isVoted: false,
+        vote: undefined,
       };
-    });
+    }) as User[];
 
     localStorage.setItem("users", JSON.stringify(usersDb));
+  }
+
+  function updateUsersDb(user: User) {
+    const users = getUsers();
+
+    if (users) {
+      const updatedUsers = [...users.filter((u) => u.name !== user.name), user];
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      setCurrentUser(JSON.parse(localStorage.getItem("currentUser")!) as User);
+    }
   }
 
   return (
@@ -64,12 +77,13 @@ export function UserProvider({ children }: UserProviderProps) {
       value={{
         isSignedIn,
         isAdmin,
-        user,
-        setUser,
+        currentUser,
+        setCurrentUser,
         login,
         logout,
         getUsers,
         createUsersDB,
+        updateUsersDb,
       }}
     >
       {children}
