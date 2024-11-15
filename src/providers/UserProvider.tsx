@@ -3,7 +3,9 @@ import { User } from "../types/User";
 import { verifyUser } from "../utils/verifyUser";
 import { getUsers } from "../utils/getUsers";
 import USERS from "../data/users.json";
+import candidates from "../data/candidates.json";
 import { updateVotesCount, VotesCount } from "../utils/updateVotes";
+import { BubbleDataPoint, ChartData, Point } from "chart.js";
 
 type UserProviderProps = {
   children: ReactNode;
@@ -14,6 +16,11 @@ type UserContext = {
   isAdmin: boolean;
   currentUser: User | undefined;
   votesCount: VotesCount;
+  chartData: ChartData<
+    "bar",
+    (number | [number, number] | Point | BubbleDataPoint | null)[],
+    unknown
+  >;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>;
   setVotesCount: React.Dispatch<React.SetStateAction<VotesCount>>;
   getUsers(): User[] | undefined;
@@ -34,6 +41,22 @@ const UserContext = createContext<UserContext | null>(null);
 export function UserProvider({ children }: UserProviderProps) {
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
   const [votesCount, setVotesCount] = useState<VotesCount>({});
+  const [chartData, setChartData] = useState<
+    ChartData<
+      "bar",
+      (number | [number, number] | Point | BubbleDataPoint | null)[],
+      unknown
+    >
+  >({
+    labels: candidates.map((c) => c.name),
+    datasets: [
+      {
+        label: "# of Votes",
+        data: candidates.map((c) => updateVotesCount()[c.name]),
+        borderWidth: 1,
+      },
+    ],
+  });
   const isSignedIn = !!currentUser;
   const isAdmin = isSignedIn && currentUser.type === "admin";
 
@@ -81,6 +104,16 @@ export function UserProvider({ children }: UserProviderProps) {
       localStorage.setItem("currentUser", JSON.stringify(user));
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser")!) as User);
       setVotesCount(updateVotesCount());
+      setChartData({
+        labels: candidates.map((c) => c.name),
+        datasets: [
+          {
+            label: "# of Votes",
+            data: candidates.map((c) => updateVotesCount()[c.name]),
+            borderWidth: 1,
+          },
+        ],
+      });
     }
   }
 
@@ -91,6 +124,7 @@ export function UserProvider({ children }: UserProviderProps) {
         isAdmin,
         currentUser,
         votesCount,
+        chartData,
         setCurrentUser,
         setVotesCount,
         login,
