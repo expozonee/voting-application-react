@@ -1,7 +1,7 @@
 .card {
-  width: 100%;
+  width: 23%;
   min-width: 300px;
-  margin: 0 auto;
+
   height: 500px;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -11,4 +11,32 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.card p:not(.my-vote) {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.card button {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.my-vote {
+  position: absolute;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  right: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  color: white;
+  background-color: #2c3e50;
 }

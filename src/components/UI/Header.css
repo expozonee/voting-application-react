@@ -10,6 +10,8 @@
 
 .header button {
   width: 200px;
+  font-size: large;
+  padding: 0.8rem;
 }
 
 .user-menu button:hover {

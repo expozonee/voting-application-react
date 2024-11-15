@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Eater&display=swap");
+
 *,
 *::after,
 *::before {
@@ -18,8 +20,22 @@
 }
 
 body {
-  overflow: hidden;
+  position: relative;
   background-color: var(--primary-color);
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://static1.thegamerimages.com/wordpress/wp-content/uploads/2023/06/4kmonstersuniversity-animationscreencaps-com-432.jpg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.6;
+  z-index: -1;
 }
 
 button {
@@ -34,4 +50,10 @@ button {
 
 button:hover {
   background-color: var(--button-hover-color);
+}
+
+.logo {
+  font-family: "Eater", cursive;
+  font-size: 2rem;
+  color: var(--text-color);
 }

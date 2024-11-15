@@ -2,8 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: start;
-  height: 100vh;
-  background-color: #f0f0f0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 2rem 0;
 }
 
 h1 {
