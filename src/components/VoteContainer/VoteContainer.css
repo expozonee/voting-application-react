@@ -7,3 +7,9 @@
   gap: 0.8rem;
   margin-top: 20px;
 }
+
+@media (max-width: 768px) {
+  .vote-container {
+    max-width: 95%;
+  }
+}
