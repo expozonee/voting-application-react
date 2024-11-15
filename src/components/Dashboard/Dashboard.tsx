@@ -1,7 +1,7 @@
-import { VoteContainer } from "../VoteContainer/VoteContainer";
 import "./Dashboard.css";
-import { useUser } from "../../providers/UserProvider";
 import AdminPage from "../AdminPage/AdminPage";
+import { useUser } from "../../providers/UserProvider";
+import { VoteContainer } from "../VoteContainer/VoteContainer";
 
 type DashboardProps = {
   page: string;
