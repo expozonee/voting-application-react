@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "James P. Sullivan",
+    "nickname": "Sulley",
+    "role": "Scarer",
+    "company": "Monsters, Inc.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBJfA-_bn1zRnEs8Gp2DxPSbNN2LjyfbMjXQ&s"
+  },
+  {
+    "id": 2,
+    "name": "Mike Wazowski",
+    "nickname": "Mike",
+    "role": "Assistant",
+    "company": "Monsters, Inc.",
+    "imageUrl": "https://www.babysavers.com/wp-content/uploads/2021/02/mike-wazowski-character.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Randall Boggs",
+    "nickname": "Randall",
+    "role": "Scarer",
+    "company": "Monsters, Inc.",
+    "imageUrl": "https://i.pinimg.com/originals/2b/bd/d0/2bbdd016fcd276303948e122b5d7d335.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Terri and Terry Perry",
+    "nickname": "Mr. Waternoose",
+    "role": "CEO",
+    "company": "Monsters, Inc.",
+    "imageUrl": "https://static01.nyt.com/images/2013/06/16/arts/16MONSTER_SPAN/16MONSTER_SPAN-superJumbo.jpg"
+  }
+]
