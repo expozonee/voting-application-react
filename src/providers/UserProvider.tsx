@@ -3,6 +3,7 @@ import { User } from "../types/User";
 import { verifyUser } from "../utils/verifyUser";
 import { getUsers } from "../utils/getUsers";
 import USERS from "../data/users.json";
+import { updateVotesCount, VotesCount } from "../utils/updateVotes";
 
 type UserProviderProps = {
   children: ReactNode;
@@ -12,7 +13,9 @@ type UserContext = {
   isSignedIn: boolean;
   isAdmin: boolean;
   currentUser: User | undefined;
+  votesCount: VotesCount;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  setVotesCount: React.Dispatch<React.SetStateAction<VotesCount>>;
   getUsers(): User[] | undefined;
   createUsersDB(): void;
   login(
@@ -30,6 +33,7 @@ const UserContext = createContext<UserContext | null>(null);
 
 export function UserProvider({ children }: UserProviderProps) {
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+  const [votesCount, setVotesCount] = useState<VotesCount>({});
   const isSignedIn = !!currentUser;
   const isAdmin = isSignedIn && currentUser.type === "admin";
 
@@ -76,6 +80,7 @@ export function UserProvider({ children }: UserProviderProps) {
       localStorage.setItem("users", JSON.stringify(updatedArrUsers));
       localStorage.setItem("currentUser", JSON.stringify(user));
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser")!) as User);
+      setVotesCount(updateVotesCount());
     }
   }
 
@@ -85,7 +90,9 @@ export function UserProvider({ children }: UserProviderProps) {
         isSignedIn,
         isAdmin,
         currentUser,
+        votesCount,
         setCurrentUser,
+        setVotesCount,
         login,
         logout,
         getUsers,
