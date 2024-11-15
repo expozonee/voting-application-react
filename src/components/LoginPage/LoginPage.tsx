@@ -39,7 +39,8 @@ export default function LoginPage() {
     <article className="login__container">
       <section className="login">
         <img src="" alt="" />
-        <h1>Vote System</h1>
+        <h1 className="logo">Monsters</h1>
+        <p>Sign in and vote for your favorite monster!!</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>
           <input ref={usernameRef} type="text" name="username" id="username" />
@@ -52,7 +53,7 @@ export default function LoginPage() {
           />
           <button type="submit">Log In</button>
         </form>
-        {status && <p>{status}</p>}
+        {status && <p className="status">{status}</p>}
       </section>
     </article>
   );
