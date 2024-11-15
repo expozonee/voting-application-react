@@ -15,12 +15,12 @@
 }
 
 .user-menu button:hover {
-  background-color: var(--button-hover-color);
+  background-color: var(--button-color);
 }
 
 .user-menu {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -30,4 +30,26 @@
   z-index: 10;
   right: 1rem;
   top: 5rem;
+}
+
+.user-menu button {
+  background-color: var(--button-hover-color);
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 2rem;
+  }
+
+  .header button {
+    width: 120px;
+    font-size: 0.8rem;
+  }
+
+  .user-menu {
+    right: 2rem;
+  }
 }

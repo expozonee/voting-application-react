@@ -27,11 +27,7 @@ export function VoteCard({ name, imageUrl }: VoteCardProps) {
 
   return (
     <div className="card">
-      <img
-        src={imageUrl}
-        alt={name}
-        style={{ width: "100%", height: "60%", objectFit: "contain" }}
-      />
+      <img src={imageUrl} alt={name} />
       <h3>{name}</h3>
       <p>Vote: {votesCount[name] ?? 0}</p>
       <button onClick={handleClick}>
