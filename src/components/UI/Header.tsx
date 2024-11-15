@@ -16,7 +16,7 @@ export function Header({ setPage }: HeaderProps) {
 
   return (
     <header className="header">
-      <div className="logo">Logo</div>
+      <div className="logo">Monsters</div>
       <button onClick={handleClick} className="logout-button">
         {currentUser?.name}
       </button>
