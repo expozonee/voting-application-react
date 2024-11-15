@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 2rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+}

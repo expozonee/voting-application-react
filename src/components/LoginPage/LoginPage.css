@@ -1,0 +1,68 @@
+.login__container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  height: 100vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 5px;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 40%;
+  max-height: 1000px;
+}
+
+.login p:not(.status) {
+  font-size: 1rem;
+  color: var(--secondary-color);
+  font-family: "Eater";
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.login .logo {
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+
+.status {
+  font-size: 1rem;
+  color: red;
+  font-family: "Eater";
+  text-align: center;
+  margin-block: 0.5rem;
+}
