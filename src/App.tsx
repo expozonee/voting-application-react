@@ -12,9 +12,9 @@ function App() {
   useEffect(() => {
     if (!localStorage.getItem("users")) {
       createUsersDB();
-    setVotesCount(updateVotesCount());
+
     }
-  }, [createUsersDB, setVotesCount]);
+  }, [createUsersDB]);
 
   useEffect(() => {
     const userString = localStorage.getItem("currentUser");
