@@ -4,22 +4,9 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import UserPage from "./components/Dashboard/UserPage";
 import { useUser } from "./providers/UserProvider";
 import { updateVotesCount } from "./utils/updateVotes";
-// import { updateVotesCount } from "./utils/updateVotes";
 
 function App() {
-  const { isSignedIn, createUsersDB, setCurrentUser, setVotesCount } =
-    useUser();
-
-  // if (!localStorage.getItem("users")) {
-  //   createUsersDB();
-
-  // }
-
-  useEffect(() => {
-    if (!localStorage.getItem("users")) {
-      createUsersDB();
-    }
-  }, [createUsersDB]);
+  const { isSignedIn, setCurrentUser, setVotesCount } = useUser();
 
   useEffect(() => {
     const userString = localStorage.getItem("currentUser");

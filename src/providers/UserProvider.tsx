@@ -39,13 +39,10 @@ type UserContext = {
 const UserContext = createContext<UserContext | null>(null);
 
 export function UserProvider({ children }: UserProviderProps) {
-  // new
-
-  if (localStorage.getItem("users") === null) {
+  if (!localStorage.getItem("users")) {
     createUsersDB();
   }
 
-  // finish new
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
   const [votesCount, setVotesCount] = useState<VotesCount>({});
   const [chartData, setChartData] = useState<
