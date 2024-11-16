@@ -66,7 +66,7 @@ export function UserProvider({ children }: UserProviderProps) {
     if (ok) {
       setCurrentUser(user);
       localStorage.setItem("currentUser", JSON.stringify(user));
-    setVotesCount(updateVotesCount());
+      setVotesCount(updateVotesCount());
     }
 
     return { ok, status };
