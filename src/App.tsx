@@ -3,23 +3,21 @@ import { useEffect } from "react";
 import LoginPage from "./components/LoginPage/LoginPage";
 import UserPage from "./components/Dashboard/UserPage";
 import { useUser } from "./providers/UserProvider";
-import { updateVotesCount } from "./utils/updateVotes";
+// import { updateVotesCount } from "./utils/updateVotes";
 
 function App() {
-  const { isSignedIn, createUsersDB, setCurrentUser, setVotesCount } =
-    useUser();
+  const { isSignedIn, createUsersDB, setCurrentUser } = useUser();
 
-    if (!localStorage.getItem("users")) {
-      createUsersDB();
+  // if (!localStorage.getItem("users")) {
+  //   createUsersDB();
 
-    }
+  // }
 
   useEffect(() => {
     if (!localStorage.getItem("users")) {
       createUsersDB();
-
     }
-  }, []);
+  }, [createUsersDB]);
 
   useEffect(() => {
     const userString = localStorage.getItem("currentUser");

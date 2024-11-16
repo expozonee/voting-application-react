@@ -39,13 +39,13 @@ type UserContext = {
 const UserContext = createContext<UserContext | null>(null);
 
 export function UserProvider({ children }: UserProviderProps) {
-    // new
+  // new
 
-    if (localStorage.getItem("users") === null) {
-      createUsersDB()
-}
+  if (localStorage.getItem("users") === null) {
+    createUsersDB();
+  }
 
-    // finish new
+  // finish new
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
   const [votesCount, setVotesCount] = useState<VotesCount>({});
   const [chartData, setChartData] = useState<
@@ -73,7 +73,6 @@ export function UserProvider({ children }: UserProviderProps) {
     if (ok) {
       setCurrentUser(user);
       localStorage.setItem("currentUser", JSON.stringify(user));
-
     }
 
     return { ok, status };
