@@ -9,6 +9,11 @@ function App() {
   const { isSignedIn, createUsersDB, setCurrentUser, setVotesCount } =
     useUser();
 
+    if (!localStorage.getItem("users")) {
+      createUsersDB();
+
+    }
+
   useEffect(() => {
     if (!localStorage.getItem("users")) {
       createUsersDB();
