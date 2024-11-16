@@ -1,5 +1,5 @@
 import "./Header.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../../providers/UserProvider";
 
 type HeaderProps = {
@@ -9,13 +9,27 @@ type HeaderProps = {
 export function Header({ setPage }: HeaderProps) {
   const { currentUser, isAdmin, logout } = useUser();
   const [isMenuShown, setIsMenuShown] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   function handleClick() {
     setIsMenuShown(!isMenuShown);
   }
 
   return (
-    <header className="header">
+    <header className={`header ${isScrolled ? "shadow" : ""}`}>
       <div className="logo">Monsters</div>
       <button onClick={handleClick} className="logout-button">
         {currentUser?.name}
