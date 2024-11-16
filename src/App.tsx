@@ -14,7 +14,7 @@ function App() {
       createUsersDB();
 
     }
-  }, [createUsersDB]);
+  }, []);
 
   useEffect(() => {
     const userString = localStorage.getItem("currentUser");
