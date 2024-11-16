@@ -12,8 +12,9 @@ function App() {
   useEffect(() => {
     if (!localStorage.getItem("users")) {
       createUsersDB();
+    setVotesCount(updateVotesCount());
     }
-  }, [createUsersDB]);
+  }, [createUsersDB, setVotesCount]);
 
   useEffect(() => {
     const userString = localStorage.getItem("currentUser");
@@ -23,9 +24,9 @@ function App() {
     }
   }, [setCurrentUser]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     setVotesCount(updateVotesCount());
-  }, [setVotesCount]);
+  }, [setVotesCount]);*/
 
   return <>{isSignedIn ? <UserPage /> : <LoginPage />}</>;
 }
