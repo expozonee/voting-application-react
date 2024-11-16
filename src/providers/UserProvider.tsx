@@ -41,7 +41,7 @@ const UserContext = createContext<UserContext | null>(null);
 export function UserProvider({ children }: UserProviderProps) {
     // new
 
-    if (!localStorage.getItem("users")) {
+    if (localStorage.getItem("users") === null) {
       createUsersDB()
 }
 
