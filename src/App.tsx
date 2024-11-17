@@ -10,15 +10,12 @@ function App() {
 
   useEffect(() => {
     const userString = localStorage.getItem("currentUser");
+    setVotesCount(updateVotesCount());
 
     if (userString) {
       setCurrentUser(JSON.parse(userString));
     }
-  }, [setCurrentUser]);
-
-  useEffect(() => {
-    setVotesCount(updateVotesCount());
-  }, [setVotesCount]);
+  }, [setCurrentUser, setVotesCount]);
 
   return <>{isSignedIn ? <UserPage /> : <LoginPage />}</>;
 }
